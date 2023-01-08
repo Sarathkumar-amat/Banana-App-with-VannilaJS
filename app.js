@@ -1,9 +1,24 @@
 var btnCheck = document.querySelector("#btn-select");
 var txt = document.querySelector("#txt-inp");
 var opVal=document.querySelector("#output");
-
+btnCheck.addEventListener("click",Handler)
+var ServerUrl = "https://lessonfourapi.tanaypratap.repl.co/translate/yoda.json";
 function Handler()
 {
-    opVal.innerText="translate "+txt.value;
+    //opVal.innerText="translate "+txt.value;
+    //var url = "https://lessonfourapi.tanaypratap.repl.co/translate/yoda.json";
+    var textValue = txt.value;
+    fetch(getTranslationUrl(textValue)).then(response=>response.json()).then(json=>{
+        var Transtext=json.contents.translated;
+        opVal.innerText=Transtext;
+    });
+    
 };
-btnCheck.addEventListener("click",Handler)
+function getTranslationUrl(text)
+{  
+    return ServerUrl+"?"+"text="+text
+}
+
+// var url = "https://lessonfourapi.tanaypratap.repl.co/translate/yoda.json?text=hello";
+
+// fetch(url).then(response=>response.json()).then(json=>console.log(json));
